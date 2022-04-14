@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="3f635739-cd4c-4da7-a24e-b400dfa61fff" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,41 +110,58 @@
       <workItem from="1649838196550" duration="11998000" />
       <workItem from="1649859135179" duration="534000" />
       <workItem from="1649859695569" duration="3000" />
-      <workItem from="1649944230630" duration="306000" />
+      <workItem from="1649944230630" duration="2118000" />
+      <workItem from="1649952719491" duration="6199000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="476" y="311" key="FileChooserDialogImpl" timestamp="1649838299380">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="476" y="311" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1649838299380" />
-    <state width="1346" height="303" key="GridCell.Tab.0.bottom" timestamp="1649859039423">
+    <state width="2005" height="120" key="GridCell.Tab.0.bottom" timestamp="1649959073986">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="1346" height="303" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1649859039423" />
-    <state width="1346" height="303" key="GridCell.Tab.0.center" timestamp="1649859039423">
+    <state width="2005" height="120" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1649959073986" />
+    <state width="2005" height="120" key="GridCell.Tab.0.center" timestamp="1649959073986">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="1346" height="303" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1649859039423" />
-    <state width="1346" height="303" key="GridCell.Tab.0.left" timestamp="1649859039423">
+    <state width="2005" height="120" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1649959073986" />
+    <state width="2005" height="120" key="GridCell.Tab.0.left" timestamp="1649959073986">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="1346" height="303" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1649859039423" />
-    <state width="1346" height="303" key="GridCell.Tab.0.right" timestamp="1649859039423">
+    <state width="2005" height="120" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1649959073986" />
+    <state width="2005" height="120" key="GridCell.Tab.0.right" timestamp="1649959073986">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="1346" height="303" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1649859039423" />
+    <state width="2005" height="120" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1649959073986" />
     <state x="205" y="201" key="SettingsEditor" timestamp="1649838341685">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="205" y="201" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1649838341685" />
+    <state x="696" y="480" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1649957562112">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="696" y="480" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2048.1112@0.0.2048.1112" timestamp="1649957562112" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Reposter$main.coverage" NAME="main Coverage Results" MODIFIED="1649944389686" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Reposter$main.coverage" NAME="main Coverage Results" MODIFIED="1649958555908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Reposter$main1.coverage" NAME="main1 Coverage Results" MODIFIED="1649849325856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
