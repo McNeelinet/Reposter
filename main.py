@@ -29,7 +29,7 @@ def tgsend_mediagroup(media):
     tgbot.send_media_group(tggroupid, media)
 
 
-# функция получает все
+# функция получает все фотографии
 def get_photos(attachments):
     photos = []
     for attachment in attachments:
