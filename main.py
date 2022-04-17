@@ -3,7 +3,7 @@ import telebot
 from telebot.types import InputMediaPhoto, InputMediaVideo
 import vk_api
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
-import youtube_dl
+import yt_dlp
 
 
 # tgbot
@@ -19,20 +19,22 @@ vksession = vk_api.VkApi(token=vktoken)
 longpoll = VkBotLongPoll(vksession, vkgroupid)
 
 
-def tgsend_mediagroup(media):
-    tgbot.send_media_group(tggroupid, media)
+# получить ссылку на репостнутый пост
+def get_repost(post):
+    repost = post.copy_history
+    if repost:
+        return f'Ответ на: https://vk.com/wall{repost[0]["from_id"]}_{repost[0]["id"]}'
+    return ''
 
 
-def tgsend_photo(photo, caption):
-    tgbot.send_photo(tggroupid, photo=photo, caption=caption)
-
-
-def tgsend_video(video, caption):
-    tgbot.send_video(tggroupid, video=video, caption=caption)
-
-
-def tgsend_message(message):
-    tgbot.send_message(tggroupid, text=message)
+# получить все прикрепленные ссылки
+def get_links(attachments):
+    links = ''
+    for attachment in attachments:
+        if attachment['type'] == 'link':
+            link = attachment['link']
+            links += f'{link["url"]}\n'
+    return links
 
 
 # получает все фотографии
@@ -50,7 +52,7 @@ def get_photos(attachments):
 
 # очищает список загруженных видео для экономии места
 def clr_videos():
-    filelist = (Path.cwd() / 'videos').glob('*.mp4')
+    filelist = (Path.cwd() / 'videos').glob('*.*')
     for file in filelist:
         file.unlink()
 
@@ -58,48 +60,48 @@ def clr_videos():
 # получает все видео
 def get_videos(attachments):
     clr_videos()
-    videos = []
     for attachment in attachments:
         if attachment['type'] == 'video':
             video = attachment['video']
             video_id = f'{video["owner_id"]}_{video["id"]}'
-            video_path = Path.cwd() / 'videos' / f'{video_id}.mp4'
-            ydl_opts = {'outtmpl': str(video_path)}  # настройки для загрузчика видео с вк
-            with youtube_dl.YoutubeDL(ydl_opts) as ydl:  # загрузчик видео с вк
+            video_path = Path.cwd() / 'videos'
+            # настройки для загрузчика видео
+            ydl_opts = {'outtmpl': f'{str(video_path)}/{video_id}.%(ext)s'}
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:  # загрузчик видео
                 ydl.download([f'https://vk.com/video{video_id}'])
-            videos.append(InputMediaVideo(video_path.read_bytes()))
+    videos = [InputMediaVideo(path.read_bytes()) for path in (Path.cwd() / 'videos').glob('*.*')]
     return videos
 
 
 def listen():
     try:
-        for event in longpoll.listen(): # ждем события в группе вк
+        for event in longpoll.listen():  # ждем события в группе вк
             if event.type == VkBotEventType.WALL_POST_NEW:
                 post = event.obj
                 attachments = post.attachments
-                repost = post.copy_history
-
-                if repost:  # проверка на наличие репоста
-                    repost_link = f'https://vk.com/wall{repost[0]["from_id"]}_{repost[0]["id"]}'
-                else:
-                    repost_link = ''
+                repost = get_repost(post)
+                message = f'{repost}\n\n{post.text}'
 
                 if attachments:  # отправить сообщение с вложениями
                     # вложения по типам
                     photos = get_photos(attachments)
                     videos = get_videos(attachments)
+                    links = get_links(attachments)
 
-                    media = photos + videos  # все вложения
-                    if len(attachments) > 1:
-                        media[-1].caption = post.text  # добавляет текст к последнему вложению
-                        tgsend_mediagroup(media)
+                    photo_video = photos + videos  # фото и видео
+                    message = f'{message}\n\n{links}'
+                    if len(photo_video) > 1:
+                        photo_video[0].caption = message  # добавляет текст к первому фото/видео
+                        tgbot.send_media_group(tggroupid, photo_video)
                     elif photos:  # если единственное вложение - фото(для этого случая нужен отдельный метод)
-                        tgsend_photo(photos[0].media, post.text + f'\n{repost_link}')
-                    elif videos:  # # если единственное вложение - видео(для этого случая нужен отдельный метод)
-                        tgsend_video(videos[0].media, post.text + f'\n{repost_link}')
-                elif post.text or repost_link:  # отправить простое сообщение
-                    tgsend_message(f'{post.text}\n{repost_link}')
-    except Exception:  # перезапуск при превышении времени ожидания события
+                        tgbot.send_photo(tggroupid, photos[0].media, caption=message)
+                    elif videos:  # если единственное вложение - видео(для этого случая нужен отдельный метод)
+                        tgbot.send_video(tggroupid, videos[0].media, caption=message)
+                    elif links:  # если единственное вложение - прикрепленная ссылка(например, статья)
+                        tgbot.send_message(tggroupid, message)
+                elif post.text or repost:  # отправить простое сообщение
+                    tgbot.send_message(tggroupid, message)
+    except Exception:
         listen()
 
 
